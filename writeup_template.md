@@ -96,11 +96,11 @@ Left camera image, steering angle 0.3404655:
 ![alt text][image5]   
 Right camera image, steering angle -0.1595345:   
 ![alt text][image6]   
-Flippled center image, steering angle -0.0904655:   
+Flipped center image, steering angle -0.0904655:   
 ![alt text][image7]   
 
 The use of the generator was vital, since it allows the unlimited generation of new data (with the use of the image translation) without the actual need of pre-processing the data.
 
-The final video files are run1 and run1-fast. The second video file has the speed tweaked so that it runs faster.
+The final video files are run1.mp4 and run1-fast.mp4 . The second video file has the speed tweaked so that it runs faster.
 
 
