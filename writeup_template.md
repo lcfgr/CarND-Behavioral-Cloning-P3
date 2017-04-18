@@ -1,6 +1,6 @@
-#**Behavioral Cloning** 
+# **Behavioral Cloning**  
 ---
-**Behavioral Cloning Project**
+**Behavioral Cloning Project**   
 
 The goals / steps of this project are the following:
 * Use the simulator to collect data of good driving behavior
@@ -24,9 +24,9 @@ The goals / steps of this project are the following:
 ###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
 
 ---
-###Files Submitted & Code Quality
+### Files Submitted & Code Quality
 
-####1. Submission includes all required files and can be used to run the simulator in autonomous mode
+#### 1. Submission includes all required files and can be used to run the simulator in autonomous mode
 
 My project includes the following files:
 * model.py containing the script to create and train the model
@@ -34,7 +34,7 @@ My project includes the following files:
 * model.h5 containing a trained convolution neural network 
 * writeup_report.md or writeup_report.pdf summarizing the results
 
-####2. Submission includes functional code
+#### 2. Submission includes functional code
 Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
 ```sh
 python drive.py model.h5
@@ -45,13 +45,13 @@ python drive-fast.py model.h5
 ```
 
 
-####3. Submission code is usable and readable
+#### 3. Submission code is usable and readable
 
 The model.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
 
-###Model Architecture and Training Strategy
+### Model Architecture and Training Strategy
 
-####1. Solution Design Approach and final Model Architecture
+#### 1. Solution Design Approach and final Model Architecture
 
 My first step was to use a convolution neural network model similar to the NVIDIA model published in the paper : End to End Learning for Self-Driving Cars (https://arxiv.org/pdf/1604.07316v1.pdf). The purpose of this network is optimized for the exactly same problem.
 
@@ -63,21 +63,21 @@ The final model architecture can be seen below:
 Firstly the input image is normallized and cropped to remove unneeded information.
 Then The basic architecture of NVIDIA model is used. However in the first 3 convolutional filters, the depth is greatly reduced. After these 3 filters, a dropout layer is used to reduce overfitting. Normally, 2 more convolutional layers follow up, but one of these was completely removed. Afterward one more dropout layer is used. Lastly, the fully connected (dense) layers follow the pipeline. However, the first big layer of 1164 neurons is completely removed, to reduce overfitting.
 
-####2. Attempts to reduce overfitting in the model
+#### 2. Attempts to reduce overfitting in the model
 
 The model contains 2 Dropout layers after the convolutional layers to reduce overfitting. Any attempt to use dropout layers between the fully connected layers resulted in worse results.
 
 The final model was also trained in stages and using the validation loss as a guide, the proper number of epochs were chosen to avoid overfitting. 
 ![alt text][image2]
-As we can see a very good balance betweeen accurancy and overfitting was at model stage 4, after 6 epochs and this number of epochs was chosen on the final model.
+A very good balance betweeen accurancy and overfitting was achieved at model stage 4, after 6 epochs. Indeed the models were tested and this model had the best performance. Therefore 6 epochs was chosen on the final model.
 
 
-####3. Model parameter tuning
+#### 3. Model parameter tuning
 
 The model used an adam optimizer, so the learning rate was not tuned manually.
 
 
-####4. Appropriate training data & data augmentation
+#### 4. Appropriate training data & data augmentation
 
 The training data used were the data provided by Udacity. The ammount of data was not enough to properly train the model. This dataset included left and right camera captured images, which were used to increase the ammount of data. These were needed to have the steering angle adjusted and the value of 0.25 was found to work well.
 
@@ -88,16 +88,16 @@ To calculate the value of the angle when translating the image, the guideline of
 
 Following are examples of the augmentation process:
 
-Original center image, with steering angle 0.0904655:
-![alt text][image3]
-Translated image, new steering angle -0.0986641488061542:
-![alt text][image4]
-Left camera image, steering angle 0.3404655:
-![alt text][image5]
-Right camera image, steering angle -0.1595345: 
-![alt text][image6]
-Flippled center image, steering angle -0.0904655:
-![alt text][image7]
+Original center image, with steering angle 0.0904655:   
+![alt text][image3]   
+Translated image, new steering angle -0.0986641488061542:   
+![alt text][image4]   
+Left camera image, steering angle 0.3404655:   
+![alt text][image5]   
+Right camera image, steering angle -0.1595345:   
+![alt text][image6]   
+Flippled center image, steering angle -0.0904655:   
+![alt text][image7]   
 
 The use of the generator was vital, since it allows the unlimited generation of new data (with the use of the image translation) without the actual need of pre-processing the data.
 
